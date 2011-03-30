@@ -1,8 +1,12 @@
 package com.wilson;
 
-import android.view.KeyEvent;
 
 public class Room {
+	private static final String CARD = "c";
+	private static final String WEST = "w";
+	private static final String SOUTH = "s";
+	private static final String EAST = "e";
+	private static final String NORTH = "n";
 	private static final String IS_NOT_A_VALID_ACTION_CURRENTLY = " is not a valid action currently";
 	private static final String CURRENTLY = " currently";
 	private static final String CANNOT_MOVE = "Cannot move ";
@@ -37,12 +41,12 @@ public class Room {
 		this.movements = movements;
 	}
 	
-	public static String invalidKey(int keyCode, KeyEvent event) {
+	public static String invalidKey(String text) {
 		String errorMsg = "";
-		if (isMovementKey(keyCode)) {
-			errorMsg = CANNOT_MOVE + event.getDisplayLabel() + CURRENTLY;
-		} else if (isActionKey(keyCode)) {
-			errorMsg = event.getDisplayLabel()
+		if (isMovementKey(text)) {
+			errorMsg = CANNOT_MOVE + text + CURRENTLY;
+		} else if (isActionKey(text)) {
+			errorMsg = text
 					+ IS_NOT_A_VALID_ACTION_CURRENTLY;
 		} else {
 			errorMsg = UNKNOWN_KEY;
@@ -50,15 +54,15 @@ public class Room {
 		return errorMsg;
 	}
 
-	private static boolean isActionKey(int keyCode) {
-		return (keyCode == KeyEvent.KEYCODE_C);
+	private static boolean isActionKey(String text) {
+		return text.equalsIgnoreCase(CARD);
 	}
 
-	private static boolean isMovementKey(int keyCode) {
-		return (keyCode == KeyEvent.KEYCODE_N)
-				|| (keyCode == KeyEvent.KEYCODE_E)
-				|| (keyCode == KeyEvent.KEYCODE_W)
-				|| (keyCode == KeyEvent.KEYCODE_S);
+	private static boolean isMovementKey(String text) {
+		return (text.equalsIgnoreCase(NORTH))
+				|| text.equalsIgnoreCase(EAST)
+				|| text.equalsIgnoreCase(SOUTH)
+				|| text.equalsIgnoreCase(WEST);
 	}
 	
 	@Override

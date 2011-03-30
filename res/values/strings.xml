@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, DungeonCrawler!</string>
     <string name="app_name">DungeonCrawler</string>
+    <string name="Enter">Enter</string>
 </resources>
