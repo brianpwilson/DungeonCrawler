@@ -33,14 +33,14 @@ public class DungeonCrawler extends Activity {
 			//10
 			new Room("A strange stain is on the floor", "n, e, s ,w", ""), 
 			new Room("A man plays guitar while others work", "s", ""), 
-			new Room("Joyous celebration can be heard to the east", "n, e, s", ""), 
+			new Room("Joyous celebration can be heard to the east", "e, s, w", ""), 
 			new Room("A turn approaches", "s, w", ""), 
 			new Room("The path continues", "n, s", ""), 
 			//15
 			new Room("", "", ""), 
 			new Room("", "", ""), 
 			new Room("", "", ""), 
-			new Room("Buzzing is heard south", "w", "c"), 
+			new Room("Buzzing is heard south", "n, w", "c"), 
 			new Room("", "", ""), 
 			//20
 			new Room("", "", ""), 
