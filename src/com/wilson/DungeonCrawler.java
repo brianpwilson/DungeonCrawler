@@ -20,10 +20,10 @@ public class DungeonCrawler extends Activity {
 	private int currentRoom = 0;
 	private Room[] rooms = new Room[] {
 			new Room("You are staring east at a large brick building", EAST, ""),
-			new Room("A locked door lies directly east", "", "c"), 
+			new Room("A locked door lies directly east", "w", "c"), 
 			new Room("The security guard ahead is sleeping", "n, s", ""), 
-			new Room("There is a locked door ahead of you", "", "c"), 
-			new Room("Paths lie north and a mysterious room is east", "n, e", ""), 
+			new Room("There is a locked door ahead of you", "s", "c"), 
+			new Room("Paths lie north and a mysterious room is east", "n, s, e", ""), 
 			//5
 			new Room("This room is filled with human feces and paper towels", "w", ""), 
 			new Room("Human activity is heard to the west. A path lies east", "e, w", ""), 
@@ -40,7 +40,7 @@ public class DungeonCrawler extends Activity {
 			new Room("", "", ""), 
 			new Room("", "", ""), 
 			new Room("", "", ""), 
-			new Room("Buzzing is heard south", "n, w", "c"), 
+			new Room("A buzzing noise is in the air", "n, w", "c"), 
 			new Room("", "", ""), 
 			//20
 			new Room("", "", ""), 
@@ -56,10 +56,11 @@ public class DungeonCrawler extends Activity {
 			new Room("A group of ogres stumbles around blindly", EAST, ""), 
 			//30
 			new Room("You've reached The PIT! Congratulations", "n", ""),
-			new Room("Many workers appear hard at work", "n", ""),
+			new Room("Many people appear hard at work", "n", ""),
 			new Room("Large machines throw paper in all directions", "n", "")};
 	private EditText textField;
 	private MediaPlayer mp;
+	private int currentSong;
 
 
 	/** Called when the activity is first created. */
@@ -77,7 +78,9 @@ public class DungeonCrawler extends Activity {
 
 		printRoom();
 		
-		mp = MediaPlayer.create(this, R.raw.zelda);
+		currentSong = R.raw.zelda;
+		mp = MediaPlayer.create(this, currentSong);
+		mp.setLooping(true);
 	    mp.start();
 	}
 
@@ -116,6 +119,17 @@ public class DungeonCrawler extends Activity {
 			mp.start();
 		}
 	}
+	
+	private void playDoor(){
+		MediaPlayer.create(this, R.raw.secret).start();
+	}
+	
+	private void changeBackgroundSong( ){
+		mp.stop();
+		mp = MediaPlayer.create(this,currentSong);
+		mp.setLooping(true);
+		mp.start();
+	}
 
 	public void handleEnter(String text) {
 		switch (currentRoom) {
@@ -129,6 +143,9 @@ public class DungeonCrawler extends Activity {
 			break;
 		case 1:
 			if (text.equalsIgnoreCase(CARD)) {
+				playDoor();
+				currentSong = R.raw.labyrinth;
+				changeBackgroundSong();
 				currentRoom = 2;
 				printRoom();
 			} else if (text.equalsIgnoreCase(WEST)) {
@@ -146,6 +163,8 @@ public class DungeonCrawler extends Activity {
 				currentRoom = 24;
 				printRoom();
 			} else if (text.equalsIgnoreCase(WEST)) {
+				currentSong = R.raw.zelda;
+				changeBackgroundSong();
 				currentRoom = 1;
 				printRoom();
 			}else {
@@ -154,6 +173,7 @@ public class DungeonCrawler extends Activity {
 			break;
 		case 3:
 			if (text.equalsIgnoreCase(CARD)) {
+				playDoor();
 				currentRoom = 4;
 				printRoom();
 			} else if (text.equalsIgnoreCase(SOUTH)) {
@@ -334,6 +354,7 @@ public class DungeonCrawler extends Activity {
 				currentRoom = 14;
 				printRoom();
 			} else if (text.equalsIgnoreCase(CARD)) {
+				playDoor();
 				currentRoom = 32;
 				printRoom();
 			} else if (text.equalsIgnoreCase(WEST)) {
@@ -406,6 +427,7 @@ public class DungeonCrawler extends Activity {
 				currentRoom = 2;
 				printRoom();
 			} else if (text.equalsIgnoreCase(CARD)) {
+				playDoor();
 				currentRoom = 23;
 				printRoom();
 			} else {
